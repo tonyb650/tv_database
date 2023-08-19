@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+        <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
+    <title>TV Show Database</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-colors navbar-expand-sm py-3">
+        <div class="container">
+          <span class="navbar-brand"><img src="{{ url_for('static', filename='/tv_logo_reg.png') }}" alt="Business logo" width="50" style="margin-right: 30px">Howdy {{session['user_name']}}!</span>
+          <div class="">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a href="/show/list" class="nav-link navbar-colors">See all shows</a>
+              </li>
+              <li class="nav-item">
+                <a href="/show/add" class="nav-link navbar-colors">+ Create a show entry</a>
+              </li>
+              <li class="nav-item">
+                <a href="/logout" class="nav-link navbar-colors">Log out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!-- Main Section -->
+    <section class="p-5">
+      <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{show.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Liked by: {{ show.likes | length }}</h6>
+                <p class="card-text">Network: {{show.network}}</p>
+                <p class="card-text">Release Date: {{show.release_date}}</p>
+                <p class="card-text">Description:<br>{{show.description}}</p>
+                <p class="card-text">Posted By: {{show.owner.first_name}}</p>
+                <a href="/show/list" class="card-link">Return to show list</a>
+                {% if show.owner.id == session['user_id'] %}
+                <a href="/show/edit/{{show.id}}" class="card-link">Edit</a>
+                {% endif %}
+            </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
