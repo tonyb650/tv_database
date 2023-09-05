@@ -89,7 +89,7 @@ class Show:
         current_show_id = None
         for row in show_dict:
             if not current_show_id == row['id']: # must be either the very first row or the first row of a new show
-                if not current_show_id == None: # must be the first row a a show that is not the very first
+                if not current_show_id == None: # must be the first row of a show that is not the very first
                     show_obj.likes = show_likes 
                     list_of_shows.append(show_obj) #add the previous show to 'list_of_shows'
                 # start working on the first row of new show

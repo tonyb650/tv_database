@@ -63,7 +63,15 @@
                   </td>
                   <td>
                     {% if not show.owner.id==session['user_id'] %}
-                      {% if (show.likes | selectattr('id', 'equalto', session['user_id']) |first  ) %} <!-- This line took me many, many hours to figure out !! -->
+                      {% for like in show.likes %}
+                        {% if like.id == session['user_id'] %}
+
+                        {% endif %}
+                      {% endfor %}
+                      <!-- Spent many hours, but just couldn't figure this out :( -->
+                      any(x.name == "t2" for x in l)
+
+                      {% if any(show.like.id == session['user_id']) %}
                         <a href="/show/unlike/{{show.id}}">unlike</a>
                       {% else %}
                         <a href="/show/like/{{show.id}}">like</a>
